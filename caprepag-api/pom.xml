@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.marcosvieirajr</groupId>
-	<artifactId>wexprepag-app</artifactId>
+	<artifactId>caprepag-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>wexprepag-app</name>
+	<name>ca-prepag-api</name>
 
 	<properties>
 		<java.version>11</java.version>
