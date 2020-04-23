@@ -1,19 +1,23 @@
-package com.marcosvieirajr.caprepag.domain.models.validator;
+package com.marcosvieirajr.caprepag.domain.card.usecase.validator;
 
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-import com.marcosvieirajr.caprepag.domain.exceptions.InvalidCardException;
-import com.marcosvieirajr.caprepag.domain.models.Card;
+import java.math.BigDecimal;
 
-public final class CardValidator {
+import com.marcosvieirajr.caprepag.domain._base.exception.SystemException;
+import com.marcosvieirajr.caprepag.domain.card.usecase.AddNewCardUseCase.Params;
+import com.marcosvieirajr.caprepag.domain.card.usecase.exeptions.InvalidAddNewCardParamsException;
+
+public final class AddNewCardValidator {
 	
-	private CardValidator() {}
+	private AddNewCardValidator() {}
 	
-	public static void validate(Card card) {
+	public static void validate(Params params) {
 		
-		if(card == null) throw new InvalidCardException("PreCard não pode ser null");
-		if(card.getUuid() == null) throw new InvalidCardException("UUID não pode ser null");
-		if(isBlank(card.getNome())) throw new InvalidCardException("Nome não pode ser vazio");
-		if(card.getSaldo().doubleValue() <= 0) throw new InvalidCardException("Saldo deve ser positivo");
+		if(isEmpty(params)) throw new SystemException("AddNewCard.Params não pode ser null");
+		if(isBlank(params.getNome())) throw new InvalidAddNewCardParamsException("Nome não pode ser vazio");
+		if(params.getSaldo().compareTo(BigDecimal.ZERO) <= 0) throw new InvalidAddNewCardParamsException("Saldo deve ser positivo");
 	}
+	
 }
