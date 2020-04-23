@@ -1,11 +1,11 @@
-package com.marcosvieirajr.caprepag.domain.models;
+package com.marcosvieirajr.caprepag.domain.card.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.UUID;
 
-import com.marcosvieirajr.caprepag.domain.gatewais.PasswordEncoder;
+import com.marcosvieirajr.caprepag.domain.ports.out.EncodePasswordPort;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,62 +22,40 @@ public class Card {
 	private String senhaPlana;
 	private String senhaCodificada;
 	
-	@Builder
-	private Card(UUID uuid, String nome, BigDecimal saldo, PasswordEncoder passwordEncoder) {
+	@Builder()
+	private Card(String nome, BigDecimal saldo, EncodePasswordPort passwordEncoder) {
 		super();
-		this.uuid = uuid;
 		this.nome = nome;
 		this.saldo = saldo;
-		this.validade = gerarValidade();
-		this.numero = gerarNumero();
-		this.cvv = gerarCvv();
-		this.senhaPlana = gerarSenha();
-		this.senhaCodificada = passwordEncoder.encode(senhaPlana);
+		gerarCard(passwordEncoder);
 	}
 	
 	private static CardBuilder builder() {
         return new CardBuilder();
     }
 	
-	public static CardBuilder builder(UUID uuid, PasswordEncoder passwordEncoder) {
-        return builder().uuid(uuid).passwordEncoder(passwordEncoder);
+	public static CardBuilder builder(String nome, BigDecimal saldo, EncodePasswordPort passwordEncoder) {
+        return builder().nome(nome).saldo(saldo).passwordEncoder(passwordEncoder);
     }
 	
 	
-	private LocalDate gerarValidade() {
-		return LocalDate.now().plusYears(2);
+	private void gerarCard(EncodePasswordPort passwordEncoder) {
+		gerarUUID();
+		gerarValidade();
+		gerarNumero();
+		gerarCvv();
+		gerarSenha(passwordEncoder);
+	}
+	
+	private void gerarUUID() {
+		this.uuid = UUID.randomUUID();
+	}
+	
+	private void gerarValidade() {
+		this.validade = LocalDate.now().plusYears(2);
 	}
 
-	private String gerarSenha() {
-		
-		var random = new Random(System.currentTimeMillis());
-		StringBuilder senha = new StringBuilder();
-		for (int i = 0; i < 4; i++) {
-			int digit = random.nextInt(10);
-			senha.append(digit);
-		}
-		return senha.toString();
-	}
-
-	private String gerarCvv() {
-		
-		var soma = validade.getYear() * validade.getMonthValue() * validade.getDayOfMonth();
-		
-		for (char digito : numero.substring(6).toCharArray()) {
-			if(digito == '0') continue;
-			soma *= Integer.parseInt(digito +"");
-			soma /= 2;
-		}
-		
-		var somaStr = soma +"";
-		
-		var digito1 = somaStr.substring(0, 1);
-		var digito2 = somaStr.substring(somaStr.length() - 1);
-		var digito3 = somaStr.substring(somaStr.length() / 2, somaStr.length() / 2 + 1);
-		return digito1 + digito2 + digito3;
-	}
-
-	private String gerarNumero() {
+	private void gerarNumero() {
 		
 		final var BIM = "123456";
 		final var totalDeDigitos = 16;
@@ -95,7 +73,37 @@ public class Card {
 		int checkDigit = getDigitoVerificador(builder.toString());
 		builder.append(checkDigit);
 
-		return builder.toString();
+		this.numero =  builder.toString();
+	}
+	
+	private void gerarCvv() {
+		
+		var soma = validade.getYear() * validade.getMonthValue() * validade.getDayOfMonth();
+		
+		for (char digito : numero.substring(6).toCharArray()) {
+			if(digito == '0') continue;
+			soma *= Integer.parseInt(digito +"");
+			soma /= 2;
+		}
+		
+		var somaStr = soma +"";
+		
+		var digito1 = somaStr.substring(0, 1);
+		var digito2 = somaStr.substring(somaStr.length() - 1);
+		var digito3 = somaStr.substring(somaStr.length() / 2, somaStr.length() / 2 + 1);
+		this.cvv =  digito1 + digito2 + digito3;
+	}
+	
+	private void gerarSenha(EncodePasswordPort passwordEncoder) {
+		
+		var random = new Random(System.currentTimeMillis());
+		StringBuilder senha = new StringBuilder();
+		for (int i = 0; i < 4; i++) {
+			int digit = random.nextInt(10);
+			senha.append(digit);
+		}
+		this.senhaPlana = senha.toString();
+		this.senhaCodificada = passwordEncoder.encode(this.senhaPlana);
 	}
 
 	private int getDigitoVerificador(String number) {
