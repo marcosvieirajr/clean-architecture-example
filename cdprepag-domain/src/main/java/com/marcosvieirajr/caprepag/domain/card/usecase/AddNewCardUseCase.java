@@ -47,7 +47,6 @@ public class AddNewCardUseCase implements UseCaseWithParameter<Params> {
 			this.nome = nome;
 			this.saldo = saldo;
 		}
-		
 	}
 
 }

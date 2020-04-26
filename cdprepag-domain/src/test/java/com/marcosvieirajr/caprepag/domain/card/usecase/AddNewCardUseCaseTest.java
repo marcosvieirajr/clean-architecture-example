@@ -23,9 +23,9 @@ import com.marcosvieirajr.caprepag.domain.ports.out.EncodePasswordPort;
 
 class AddNewCardUseCaseTest {
 	
-	CompletablePort<Card> completable;
 	UseCaseWithParameter<AddNewCardUseCase.Params> addNewCard;
 	
+	CompletablePort<Card> completable;
 	EncodePasswordPort encodePasswordPort = Mockito.mock(EncodePasswordPort.class);
 	SaveCardPort saveCardPort = Mockito.mock(SaveCardPort.class);
 	
