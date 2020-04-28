@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.mj.prepag.core.card.usecase.AddNewCardUseCaseImplTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-04-28T05:08:27" hostname="Mac-de-Marcos.local" time="0.058">
+  <properties/>
+  <testcase name="whenValidCardRequest_returnNewCard()" classname="com.mj.prepag.core.card.usecase.AddNewCardUseCaseImplTest" time="0.058"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

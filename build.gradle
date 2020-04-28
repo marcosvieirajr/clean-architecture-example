@@ -1,0 +1,18 @@
+description = "Project description root"
+
+subprojects {
+    group = 'com.mj.prepag'
+	version = '0.0.1'
+	repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+project(':app') {
+	description = "Project description app"
+}
+
+project(':core') {
+	description = "Project description core"
+}

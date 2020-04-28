@@ -1,0 +1,14 @@
+info:
+  application:
+    description: Project description app
+    name: clean-architecture-example
+    version: 0.0.1
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health,info,logfile,flyway,env

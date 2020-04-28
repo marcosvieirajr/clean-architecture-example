@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.mj.prepag.core.card.usecase.validator.ParamsValidatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-04-28T05:08:26" hostname="Mac-de-Marcos.local" time="0.035">
+  <properties/>
+  <testcase name="whenNullParams_throwsException()" classname="com.mj.prepag.core.card.usecase.validator.ParamsValidatorTest" time="0.026"/>
+  <testcase name="whenSaldoLessThanOrEqualsToZero_throwsException()" classname="com.mj.prepag.core.card.usecase.validator.ParamsValidatorTest" time="0.005"/>
+  <testcase name="whenEmptyName_throwsException()" classname="com.mj.prepag.core.card.usecase.validator.ParamsValidatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
