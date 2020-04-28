@@ -9,10 +9,10 @@ subprojects {
     }
 }
 
-project(':app') {
+project(':prepag:app') {
 	description = "Project description app"
 }
 
-project(':core') {
+project(':prepag:core') {
 	description = "Project description core"
 }
