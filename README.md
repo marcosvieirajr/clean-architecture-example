@@ -1,6 +1,6 @@
-# CA PREPAG - Clean Architecture
+# PREPAG - Clean Architecture
 
-Implementação de Clean Architecture em uma silples API de exemplo de cartão pré pago que pode ser adquirido sem muita burocracia, o CA PREPAG.
+Exwmplo de implementação de Clean Architecture em uma silples API de cartão pré pago que pode ser adquirido sem muita burocracia, o PREPAG.
 
 ## User Stories
 
