@@ -1,5 +1,0 @@
-rootProject.name = 'clean-architecture-example'
-
-// application
-include 'prepag:core'
-include 'prepag:app'

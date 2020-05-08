@@ -1,0 +1,28 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:db
+    username: sa
+    password: 
+  jpa:
+    show-sql: true  
+info:
+  application:
+    description: ${description}
+    name: ${rootProject.name}
+    version: ${version}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: mappings
+#        include: health,info,logfile,flyway,env,mappings
+#server:
+#  servlet:
+#    context-path: /api
