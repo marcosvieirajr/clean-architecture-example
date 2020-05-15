@@ -1,3 +1,5 @@
+https://img.shields.io/codecov/c/github/marcosvieirajr/clean-architecture-example?flag=CODECOV_TOKEN&token=113bff33-baf9-4eed-8c40-8a3c493430ce
+
 # PREPAG - Clean Architecture
 
 Exwmplo de implementação de Clean Architecture em uma silples API de cartão pré pago que pode ser adquirido sem muita burocracia, o PREPAG.
